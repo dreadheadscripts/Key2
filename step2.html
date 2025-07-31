@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Script Maniac Hub Key System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+    /* ==== Base Styles ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a0a0a;
+  color: #00e0ff;
+  user-select: none;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* ==== Light Mode ==== */
+body.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* ==== Container ==== */
+.container {
+  width: 90%;
+  max-width: 600px;
+  background: linear-gradient(135deg, #050505, #1a1a1a);
+  border: 3px solid #003366;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.2),
+    inset 0 0 12px rgba(0, 255, 255, 0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+body.light-mode .container {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #cccccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+}
+
+/* ==== Headings & Text ==== */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #00eaff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+body.light-mode h1 {
+  color: #000000;
+  text-shadow: none;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #d0f6ff;
+}
+
+body.light-mode p {
+  color: #000000;
+}
+
+/* ==== Buttons ==== */
+button {
+  display: inline-block;
+  background: linear-gradient(145deg, #00bcd4, #0097a7);
+  color: #ffffff;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #00838f;
+  box-shadow: 0 0 25px #00eaffaa;
+  transform: translateY(-3px);
+}
+
+#copyBtn {
+  margin-top: 0.75rem;
+}
+
+/* ==== Key Display Box ==== */
+#keyBox {
+  background-color: #101820;
+  color: #00eaff;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  padding: 1.25rem;
+  border: 2px solid #00eaff88;
+  border-radius: 14px;
+  box-shadow: inset 0 0 20px #00eaff33;
+  margin-top: 1rem;
+  word-break: break-word;
+  user-select: all;
+}
+
+body.light-mode #keyBox {
+  background-color: #f7f7f7;
+  color: #000000;
+  border: 2px solid #cccccc;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ==== Timer Text ==== */
+#countdown,
+#keyTimer {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffdd57;
+}
+
+body.light-mode #countdown,
+body.light-mode #keyTimer {
+  color: #222222;
+}
+
+/* ==== Theme Toggle Button ==== */
+#darkToggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  border: 2px solid #00eaff;
+  background: transparent;
+  color: #00eaff;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 8px #00eaff88;
+  transition: all 0.3s ease;
+}
+
+#darkToggle:hover {
+  background-color: #00eaff;
+  color: #000;
+  box-shadow: 0 0 16px #00eaff;
+}
+
+body.light-mode #darkToggle {
+  border-color: #000000;
+  color: #000000;
+  box-shadow: 0 0 6px #999;
+}
+
+body.light-mode #darkToggle:hover {
+  background-color: #000000;
+  color: #ffffff;
+  box-shadow: 0 0 10px #000000;
+}
+
+/* ==== Responsive Layout ==== */
+@media (max-width: 768px) {
+  .container {
+    padding: 2.5rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  #keyBox {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  #darkToggle {
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  #keyBox {
+    font-size: 0.9rem;
+  }
+}
+  </style>
+
+  <!-- ✅ Referrer check -->
+    <script>
+    (() => {
+      const allowed = ["linkvertise.com", "link-target.net"];
+      const ref = document.referrer.toLowerCase();
+      if (!allowed.some(site => ref.includes(site))) {
+        window.location.href = "index.html";
+      }
+    })();
+  </script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+<button id="darkToggle">Light Mode</button>
+<div class="container">
+  <h1>Script Maniac Hub KeySystem</h1>
+  <p id="messageText">Final Checkpoint</p>
+
+  <div id="captchaContainer">
+    <button id="finishBtn">Get Key</button>
+  </div>
+
+  <div id="keyActiveSection" style="display:none;">
+    <p><strong>You have already created a key.</strong></p>
+    <p>Key is still active: <span id="keyTimer">Loading...</span></p>
+    <div id="keyBox">[Your Key Here]</div>
+    <button id="copyBtn">Copy Key</button>
+  </div>
+
+  <div id="countdown">Loading timer...</div>
+</div>
+
+<script>
+  // ✅ Firebase Configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDpgv4ZMQ_VKdW565VsDReKGYKJMTVeK58",
+    authDomain: "smh-keysystem.firebaseapp.com",
+    projectId: "smh-keysystem",
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // ✅ DOM Elements
+  const darkToggle = document.getElementById('darkToggle');
+  const countdown = document.getElementById('countdown');
+  const finishBtn = document.getElementById('finishBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const keyBox = document.getElementById('keyBox');
+  const keyActiveSection = document.getElementById('keyActiveSection');
+  const captchaContainer = document.getElementById('captchaContainer');
+  const messageText = document.getElementById('messageText');
+  const keyTimerDisplay = document.getElementById("keyTimer");
+  const body = document.body;
+
+  // ✅ Constants
+  const MAX_SESSION_MS = 3 * 60 * 60 * 1000;
+  const MAX_KEY_MS = 8 * 60 * 60 * 1000;
+
+  const sessionStartKey = 'smh_sessionStart';
+  const keyStorage = 'smh_key';
+  const keyTimeKey = 'smh_keyTime';
+
+  if (!localStorage.getItem(sessionStartKey)) {
+    localStorage.setItem(sessionStartKey, Date.now().toString());
+  }
+
+  function formatTime(ms) {
+    const totalSec = Math.floor(ms / 1000);
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+  }
+
+  function showKeyUI(key) {
+    messageText.style.display = 'none';
+    captchaContainer.style.display = 'none';
+    keyActiveSection.style.display = 'block';
+    keyBox.textContent = key;
+  }
+
+  function showNormalUI() {
+    messageText.style.display = 'block';
+    captchaContainer.style.display = 'block';
+    keyActiveSection.style.display = 'none';
+  }
+
+  function updateDarkToggleText() {
+    darkToggle.textContent = body.classList.contains('light-mode') ? 'Dark Mode' : 'Light Mode';
+  }
+
+  darkToggle.onclick = () => {
+    body.classList.toggle('light-mode');
+    localStorage.setItem('smh_darkMode', body.classList.contains('light-mode') ? '1' : '0');
+    updateDarkToggleText();
+  };
+
+  if (localStorage.getItem('smh_darkMode') === '1') {
+    body.classList.add('light-mode');
+  }
+
+  updateDarkToggleText();
+
+  async function validateKeyFromFirestore(key) {
+    try {
+      const docSnap = await db.collection("keys").doc(key).get();
+      if (!docSnap.exists) return false;
+      const data = docSnap.data();
+      return data.valid === true && typeof data.expiresAt === 'number' && Date.now() < data.expiresAt;
+    } catch (e) {
+      console.error("Firestore validation failed:", e);
+      return false;
+    }
+  }
+
+  async function checkKey() {
+    const key = localStorage.getItem(keyStorage);
+    if (!key) {
+      showNormalUI();
+      return false;
+    }
+
+    const valid = await validateKeyFromFirestore(key);
+    if (!valid) {
+      localStorage.clear();
+      window.location.href = "index.html";
+      return false;
+    }
+
+    showKeyUI(key);
+    return true;
+  }
+
+  async function periodicKeyValidation() {
+    const key = localStorage.getItem(keyStorage);
+    if (!key) return;
+    const valid = await validateKeyFromFirestore(key);
+    if (!valid) {
+      localStorage.clear();
+      alert("Key expired or invalid.");
+      window.location.href = "index.html";
+    }
+  }
+
+  function updateTimers() {
+    const now = Date.now();
+    const key = localStorage.getItem(keyStorage);
+    const keyTime = parseInt(localStorage.getItem(keyTimeKey), 10);
+    const sessionStart = parseInt(localStorage.getItem(sessionStartKey), 10);
+
+    if (key && keyTime && !isNaN(keyTime)) {
+      const remaining = keyTime - now;
+      if (remaining <= 0) {
+        localStorage.clear();
+        alert('Key expired. Please restart the process.');
+        location.reload();
+        return;
+      }
+      countdown.textContent = `⏳ Time remaining: ${formatTime(remaining)}`;
+      if (keyTimerDisplay) keyTimerDisplay.textContent = formatTime(remaining);
+    } else {
+      const startTime = sessionStart || now;
+      if (!sessionStart) localStorage.setItem(sessionStartKey, now.toString());
+      const remaining = (startTime + MAX_SESSION_MS) - now;
+      if (remaining <= 0) {
+        localStorage.clear();
+        alert('Session expired. Please restart the process.');
+        location.reload();
+        return;
+      }
+      countdown.textContent = `⏳ Session time remaining: ${formatTime(remaining)}`;
+    }
+  }
+
+  // ✅ Copy to clipboard
+  copyBtn.onclick = () => {
+    navigator.clipboard.writeText(keyBox.textContent).then(() => {
+      alert('Key copied to clipboard!');
+    }).catch(() => {
+      alert('Failed to copy key.');
+    });
+  };
+
+  // ✅ Final redirect button
+  finishBtn.onclick = () => {
+  window.location.href = "https://link-target.net/1365830/WbdU2hopNwcu";
+};
+
+  // ✅ Start loop
+  setInterval(() => {
+    updateTimers();
+    periodicKeyValidation();
+  }, 1000);
+
+  window.addEventListener("DOMContentLoaded", () => {
+    updateTimers();
+    checkKey();
+  });
+</script>
+</body>
+</html>
