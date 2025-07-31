@@ -225,7 +225,7 @@ body.light-mode #darkToggle:hover {
   <!-- ✅ Referrer check -->
     <script>
     (() => {
-      const allowed = ["https://loot-link.com/s?rYmzSp1H", "lootlabs.gg", "loot-link.com"];
+      const allowed = ["https://loot-link.com/s?rYmzSp1H", "loot-link.com"];
       const ref = document.referrer.toLowerCase();
       if (!allowed.some(site => ref.includes(site))) {
         window.location.href = "index.html";
